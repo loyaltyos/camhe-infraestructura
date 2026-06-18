@@ -10,7 +10,7 @@ export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState(
-    "Solicitud recibida. Un asesor de CAMHE Infraestructura se pondrá en contacto contigo para finalizar la cotización."
+    "Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago."
   );
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +24,8 @@ export default function Checkout() {
       company: String(form.get("company") || ""),
       phone: String(form.get("phone") || ""),
       email: String(form.get("email") || ""),
-      projectLocation: String(form.get("projectLocation") || "")
+      cityState: String(form.get("cityState") || ""),
+      comments: String(form.get("comments") || "")
     };
 
     try {
@@ -43,14 +44,11 @@ export default function Checkout() {
         return;
       }
 
-      setMessage(
-        data.message ||
-          "Pago pendiente de integración. Un asesor de CAMHE Infraestructura se comunicará contigo para finalizar la compra."
-      );
+      setMessage("Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.");
       setSubmitted(true);
       clearCart();
     } catch {
-      setMessage("Solicitud recibida. Un asesor de CAMHE Infraestructura se pondrá en contacto contigo para finalizar la cotización.");
+      setMessage("Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.");
       setSubmitted(true);
       clearCart();
     } finally {
@@ -85,11 +83,11 @@ export default function Checkout() {
               <input name="name" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
             </label>
             <label className="grid gap-2 text-sm font-bold">
-              Empresa o institución
+              Empresa <span className="font-normal text-neutral-500">Opcional</span>
               <input name="company" className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
             </label>
             <label className="grid gap-2 text-sm font-bold">
-              Teléfono / WhatsApp
+              Teléfono
               <input name="phone" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
             </label>
             <label className="grid gap-2 text-sm font-bold">
@@ -98,18 +96,18 @@ export default function Checkout() {
             </label>
           </div>
           <label className="grid gap-2 text-sm font-bold">
-            Ubicación del proyecto
-            <input name="projectLocation" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
+            Ciudad / Estado
+            <input name="cityState" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
           </label>
           <label className="grid gap-2 text-sm font-bold">
             Comentarios de proyecto
             <textarea name="comments" rows={5} className="rounded-md border border-neutral-300 p-3 font-normal" placeholder="Volumen requerido, medidas, fecha estimada, condiciones de entrega o especificaciones." />
           </label>
           <p className="rounded-md bg-neutral-100 p-4 text-sm leading-6 text-neutral-700">
-            Pago pendiente de integración. Si las llaves de Conekta no están configuradas, un asesor de CAMHE Infraestructura se comunicará contigo para finalizar la compra.
+            Pago en línea pendiente de integración con Conekta.
           </p>
           <button type="submit" disabled={loading} className="h-12 rounded-md bg-camhe-yellow px-6 font-black text-camhe-black disabled:cursor-not-allowed disabled:opacity-70">
-            {loading ? "Procesando..." : "Continuar solicitud"}
+            {loading ? "Enviando..." : "Enviar solicitud"}
           </button>
         </form>
 

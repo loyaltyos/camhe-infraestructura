@@ -12,6 +12,8 @@ type CheckoutCustomer = {
   phone?: string;
   company?: string;
   projectLocation?: string;
+  cityState?: string;
+  comments?: string;
 };
 
 const conektaApiUrl = "https://api.conekta.io/orders";
@@ -23,7 +25,7 @@ export async function POST(request: Request) {
   if (!privateKey) {
     return NextResponse.json({
       status: "pending_integration",
-      message: "Pago pendiente de integración. Un asesor de CAMHE Infraestructura se comunicará contigo para finalizar la compra."
+      message: "Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago."
     });
   }
 
@@ -75,7 +77,9 @@ export async function POST(request: Request) {
     metadata: {
       source: "camhe-infraestructura-web",
       company: customer.company || "",
-      project_location: customer.projectLocation || ""
+      project_location: customer.projectLocation || customer.cityState || "",
+      city_state: customer.cityState || "",
+      comments: customer.comments || ""
     },
     checkout: {
       type: "HostedPayment",
