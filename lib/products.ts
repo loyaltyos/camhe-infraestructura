@@ -9,6 +9,7 @@ export type Product = {
   price?: number;
   priceType?: "fixed" | "from" | "quote";
   image: string;
+  altText: string;
   featured?: boolean;
 };
 
@@ -21,7 +22,15 @@ const specsByCategory: Record<Category, string[]> = {
   "Casetas y Módulos": ["Estructura prefabricada", "Configuración bajo pedido", "Entrega coordinada"]
 };
 
-const baseProducts: Array<Omit<Product, "id" | "description" | "specs" | "image">> = [
+const slug = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const baseProducts: Array<Omit<Product, "id" | "description" | "specs" | "image" | "altText">> = [
   { name: "Banca urbana metálica", category: "Mobiliario Urbano", price: 7900, featured: true },
   { name: "Banca urbana de concreto", category: "Mobiliario Urbano", price: 11800 },
   { name: "Banca con respaldo de acero", category: "Mobiliario Urbano", price: 9200 },
@@ -76,10 +85,11 @@ const baseProducts: Array<Omit<Product, "id" | "description" | "specs" | "image"
 
 export const products: Product[] = baseProducts.map((product, index) => ({
   ...product,
-  id: `${product.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")}-${index + 1}`,
+  id: `${slug(product.category)}-${index + 1}`,
   description: `${product.name} para proyectos de infraestructura urbana, fraccionamientos, municipios, parques industriales y obra privada.`,
   specs: specsByCategory[product.category],
-  image: `/products/${product.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")}-${index + 1}.svg`,
+  image: `/products/infraestructura/${slug(product.name)}.jpg`,
+  altText: `Fotografía real de ${product.name.toLowerCase()} para catálogo de CAMHE Infraestructura`,
   priceType: product.priceType ?? (product.price ? "fixed" : "quote")
 }));
 
