@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AddToCartButton } from "@/components/add-to-cart-button";
-import { Product, formatPrice } from "@/lib/products";
+import { Product, formatProductPrice } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -16,7 +16,7 @@ export function ProductCard({ product }: { product: Product }) {
         <h3 className="min-h-12 text-lg font-black text-camhe-black">{product.name}</h3>
         <p className="mt-2 text-sm leading-6 text-neutral-600">{product.description}</p>
         <div className="mt-4 border-t border-neutral-200 pt-4">
-          <p className="text-xl font-black text-camhe-black">{formatPrice(product.price)}</p>
+          <p className="text-xl font-black text-camhe-black">{formatProductPrice(product)}</p>
           <ul className="mt-3 space-y-1 text-xs text-neutral-600">
             {product.specs.map((spec) => (
               <li key={spec}>• {spec}</li>

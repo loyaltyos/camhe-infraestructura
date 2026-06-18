@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, formatProductPrice } from "@/lib/products";
 
 export default function Carrito() {
   const { items, removeItem, setQuantity, subtotal } = useCart();
@@ -27,7 +27,7 @@ export default function Carrito() {
                 <div>
                   <p className="text-xs font-black uppercase text-camhe-yellow">{item.product.category}</p>
                   <h2 className="mt-1 text-xl font-black">{item.product.name}</h2>
-                  <p className="mt-2 text-sm text-neutral-600">{formatPrice(item.product.price)}</p>
+                  <p className="mt-2 text-sm text-neutral-600">{formatProductPrice(item.product)}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button
@@ -61,7 +61,7 @@ export default function Carrito() {
           </div>
           <aside className="h-fit rounded-lg bg-camhe-black p-6 text-white">
             <p className="text-sm font-bold text-neutral-300">Subtotal estimado</p>
-            <p className="mt-2 text-3xl font-black">{formatPrice(subtotal)}</p>
+            <p className="mt-2 text-3xl font-black">{formatPrice(subtotal)} MXN</p>
             <p className="mt-3 text-sm leading-6 text-neutral-300">
               El subtotal considera únicamente productos con precio estimado. La cotización final puede variar por volumen, especificación y entrega.
             </p>

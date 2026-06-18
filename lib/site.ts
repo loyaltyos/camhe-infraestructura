@@ -1,7 +1,7 @@
 export const contact = {
   phone: "+52 55 4517 4522",
   whatsapp: "525545174522",
-  email: "info@camheiluminacion.com",
+  email: "info@camheinfraestructura.com.mx",
   address: "Av. Cvln Dr Alt 164, Independiente Poniente, 44290, Guadalajara, Jalisco"
 };
 
