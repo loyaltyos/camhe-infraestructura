@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f5f5f2;
+  color: #111113;
+}
+
+::selection {
+  background: #f3c316;
+  color: #0b0b0c;
+}
+
+.industrial-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.hazard-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #f3c316 0,
+    #f3c316 12px,
+    #111113 12px,
+    #111113 24px
+  );
+}
