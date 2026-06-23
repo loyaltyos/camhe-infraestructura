@@ -11,7 +11,7 @@ export default function Carrito() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
       <p className="text-sm font-black uppercase tracking-wide text-camhe-yellow">Carrito</p>
-      <h1 className="mt-3 text-4xl font-black text-camhe-black">Solicitud de productos</h1>
+      <h1 className="mt-3 text-4xl font-black text-camhe-black">Productos seleccionados</h1>
       {items.length === 0 ? (
         <div className="mt-10 rounded-lg bg-white p-8 text-center">
           <p className="text-neutral-600">Tu carrito está vacío.</p>
@@ -63,10 +63,10 @@ export default function Carrito() {
             <p className="text-sm font-bold text-neutral-300">Subtotal estimado</p>
             <p className="mt-2 text-3xl font-black">{formatPrice(subtotal)} MXN</p>
             <p className="mt-3 text-sm leading-6 text-neutral-300">
-              El subtotal considera únicamente productos con precio estimado. La cotización final puede variar por volumen, especificación y entrega.
+              El subtotal considera productos con precio estimado. La confirmación final puede variar por volumen, especificación, disponibilidad y entrega.
             </p>
             <Link href="/checkout" className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-md bg-camhe-yellow px-5 font-black text-camhe-black">
-              Solicitar cotización
+              Continuar al checkout
             </Link>
           </aside>
         </div>

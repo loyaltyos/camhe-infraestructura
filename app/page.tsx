@@ -37,7 +37,7 @@ export default function Home() {
                 Ver catálogo <ArrowRight className="h-5 w-5" />
               </Link>
               <Link href="/checkout" className="inline-flex h-12 items-center justify-center rounded-md border border-white/40 px-6 font-bold text-white hover:border-camhe-yellow hover:text-camhe-yellow">
-                Solicitar cotización
+                Ir al checkout
               </Link>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="Categorías"
           title="Soluciones para obra urbana, vialidad y operación pública"
-          description="Un catálogo preparado para especificación, compra por volumen y entregas coordinadas por proyecto."
+          description="Un catálogo preparado para compra por volumen, especificación y entregas coordinadas por proyecto."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
@@ -67,7 +67,7 @@ export default function Home() {
 
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Destacados" title="Productos listos para integrar a tu cotización" />
+          <SectionHeading eyebrow="Destacados" title="Productos listos para integrar a tu pedido" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -86,7 +86,7 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               ["Catálogo industrial", HardHat, "Productos para obra urbana, vialidades, parques y accesos."],
-              ["Atención a proyecto", ClipboardCheck, "Cotización según volumen, medidas, acabados y ubicación."],
+              ["Atención a proyecto", ClipboardCheck, "Compra o cotización según volumen, medidas, acabados y ubicación."],
               ["Entrega coordinada", Truck, "Programación de entrega conforme a disponibilidad y alcance."],
               ["Enfoque corporativo", ShieldCheck, "Comunicación clara para empresas, municipios y desarrolladores."]
             ].map(([title, Icon, text]) => (
@@ -104,11 +104,11 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="text-sm font-black uppercase text-camhe-yellow">Proceso</p>
-            <h2 className="mt-3 text-3xl font-black sm:text-4xl">Cotización sin pagos en línea</h2>
-            <p className="mt-4 text-neutral-300">Agrega productos, envía tu solicitud y un asesor confirma especificaciones, disponibilidad, tiempos y entrega.</p>
+            <h2 className="mt-3 text-3xl font-black sm:text-4xl">Checkout simple con seguimiento de asesor</h2>
+            <p className="mt-4 text-neutral-300">Agrega productos, comparte tus datos y paga con Conekta cuando el checkout esté activo. Si falta configuración, recibiremos tu solicitud como cotización.</p>
           </div>
           <div className="grid gap-4">
-            {["Selecciona productos del catálogo", "Comparte datos de proyecto y entrega", "Recibe seguimiento de CAMHE Infraestructura"].map((step, index) => (
+            {["Selecciona productos del catálogo", "Comparte datos de proyecto y entrega", "Paga en línea o recibe seguimiento de CAMHE"].map((step, index) => (
               <div key={step} className="flex items-center gap-4 border border-neutral-800 bg-white/5 p-5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-camhe-yellow font-black text-camhe-black">{index + 1}</span>
                 <p className="font-bold">{step}</p>

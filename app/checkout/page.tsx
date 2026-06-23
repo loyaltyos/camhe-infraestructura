@@ -1,22 +1,43 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
 import { formatPrice, formatProductPrice } from "@/lib/products";
+
+const quoteMessage =
+  "Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.";
 
 export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
-  const [message, setMessage] = useState(
-    "Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago."
-  );
+  const [message, setMessage] = useState(quoteMessage);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [conektaConfigured, setConektaConfigured] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch("/api/conekta/create-checkout")
+      .then((response) => response.json())
+      .then((data) => {
+        if (active) setConektaConfigured(Boolean(data.conektaConfigured));
+      })
+      .catch(() => {
+        if (active) setConektaConfigured(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    setError("");
 
     const form = new FormData(event.currentTarget);
     const customer = {
@@ -37,20 +58,23 @@ export default function Checkout() {
           items: items.map((item) => ({ productId: item.product.id, quantity: item.quantity }))
         })
       });
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        setError(data.error || "No fue posible procesar tu solicitud. Intenta de nuevo.");
+        return;
+      }
 
       if (data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
         return;
       }
 
-      setMessage("Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.");
+      setMessage(data.message || quoteMessage);
       setSubmitted(true);
       clearCart();
     } catch {
-      setMessage("Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.");
-      setSubmitted(true);
-      clearCart();
+      setError("No fue posible conectar con el checkout. Intenta de nuevo o contáctanos por WhatsApp.");
     } finally {
       setLoading(false);
     }
@@ -61,9 +85,7 @@ export default function Checkout() {
       <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 lg:px-8">
         <CheckCircle2 className="mx-auto h-16 w-16 text-camhe-yellow" />
         <h1 className="mt-6 text-4xl font-black text-camhe-black">Solicitud recibida</h1>
-        <p className="mt-4 text-lg leading-8 text-neutral-700">
-          {message}
-        </p>
+        <p className="mt-4 text-lg leading-8 text-neutral-700">{message}</p>
         <Link href="/catalogo" className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-camhe-yellow px-6 font-black text-camhe-black">
           Volver al catálogo
         </Link>
@@ -74,7 +96,7 @@ export default function Checkout() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <p className="text-sm font-black uppercase tracking-wide text-camhe-yellow">Checkout</p>
-      <h1 className="mt-3 text-4xl font-black text-camhe-black">Solicitud de cotización</h1>
+      <h1 className="mt-3 text-4xl font-black text-camhe-black">{conektaConfigured ? "Pago seguro" : "Solicitud de cotización"}</h1>
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_360px]">
         <form onSubmit={onSubmit} className="grid gap-5 rounded-lg bg-white p-6 shadow-sm">
           <div className="grid gap-5 sm:grid-cols-2">
@@ -91,7 +113,7 @@ export default function Checkout() {
               <input name="phone" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
             </label>
             <label className="grid gap-2 text-sm font-bold">
-              Correo electrónico
+              Email
               <input name="email" type="email" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
             </label>
           </div>
@@ -100,14 +122,22 @@ export default function Checkout() {
             <input name="cityState" required className="h-11 rounded-md border border-neutral-300 px-3 font-normal" />
           </label>
           <label className="grid gap-2 text-sm font-bold">
-            Comentarios de proyecto
+            Comentarios <span className="font-normal text-neutral-500">Opcional</span>
             <textarea name="comments" rows={5} className="rounded-md border border-neutral-300 p-3 font-normal" placeholder="Volumen requerido, medidas, fecha estimada, condiciones de entrega o especificaciones." />
           </label>
-          <p className="rounded-md bg-neutral-100 p-4 text-sm leading-6 text-neutral-700">
-            Pago en línea pendiente de integración con Conekta.
-          </p>
+          {!conektaConfigured && (
+            <p className="rounded-md bg-neutral-100 p-4 text-sm leading-6 text-neutral-700">
+              El pago en línea se activará al configurar las credenciales de Conekta. Por ahora enviaremos tu solicitud a un asesor.
+            </p>
+          )}
+          {error && (
+            <div className="flex gap-3 rounded-md bg-red-50 p-4 text-sm leading-6 text-red-800">
+              <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+              <p>{error}</p>
+            </div>
+          )}
           <button type="submit" disabled={loading} className="h-12 rounded-md bg-camhe-yellow px-6 font-black text-camhe-black disabled:cursor-not-allowed disabled:opacity-70">
-            {loading ? "Enviando..." : "Enviar solicitud"}
+            {loading ? "Procesando..." : conektaConfigured ? "Pagar con Conekta" : "Enviar solicitud"}
           </button>
         </form>
 
@@ -115,7 +145,7 @@ export default function Checkout() {
           <h2 className="text-xl font-black">Resumen</h2>
           <div className="mt-5 space-y-4">
             {items.length === 0 ? (
-              <p className="text-sm text-neutral-300">No hay productos en el carrito. Puedes enviar una solicitud general o regresar al catálogo.</p>
+              <p className="text-sm text-neutral-300">No hay productos en el carrito. Regresa al catálogo para agregar productos.</p>
             ) : (
               items.map((item) => (
                 <div key={item.product.id} className="border-b border-neutral-800 pb-3 text-sm">
@@ -126,7 +156,7 @@ export default function Checkout() {
             )}
           </div>
           <div className="mt-5 border-t border-neutral-800 pt-5">
-            <p className="text-sm text-neutral-300">Subtotal estimado</p>
+            <p className="text-sm text-neutral-300">Subtotal</p>
             <p className="mt-1 text-2xl font-black">{formatPrice(subtotal)} MXN</p>
           </div>
         </aside>

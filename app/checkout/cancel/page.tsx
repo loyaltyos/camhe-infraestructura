@@ -7,7 +7,7 @@ export default function CheckoutCancel() {
       <XCircle className="mx-auto h-16 w-16 text-camhe-yellow" />
       <h1 className="mt-6 text-4xl font-black text-camhe-black">Pago no completado</h1>
       <p className="mt-4 text-lg leading-8 text-neutral-700">
-        No se completó el pago. Puedes volver al carrito o solicitar apoyo de un asesor de CAMHE Infraestructura.
+        El pago no fue completado. Puedes volver al carrito o contactarnos por WhatsApp.
       </p>
       <Link href="/carrito" className="mt-8 inline-flex h-12 items-center justify-center rounded-md bg-camhe-yellow px-6 font-black text-camhe-black">
         Volver al carrito

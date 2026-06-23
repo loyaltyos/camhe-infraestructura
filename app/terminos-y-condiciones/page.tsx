@@ -4,12 +4,12 @@ export const metadata: Metadata = { title: "Términos y condiciones" };
 
 export default function Terminos() {
   return <LegalPage title="Términos y condiciones" paragraphs={[
-    "El sitio de CAMHE Infraestructura funciona como catálogo y medio de solicitud de cotización para productos de equipamiento urbano, vial, pluvial y modular.",
-    "Todos los precios se muestran en pesos mexicanos y pueden cambiar sin previo aviso por volumen, especificación, disponibilidad, ubicación de entrega, vigencia de proveedor o condiciones del proyecto.",
-    "Los productos están sujetos a disponibilidad. En artículos voluminosos, prefabricados o fabricados bajo medida, el envío puede requerir cotización especial y validación logística con un asesor.",
-    "Enviar una solicitud no constituye una compra confirmada. Un asesor validará productos, cantidades, fichas técnicas, tiempos de entrega, facturación disponible y condiciones comerciales antes de confirmar el pedido.",
-    "Cuando la pasarela esté activa, los pagos podrán procesarse mediante Conekta. Mientras no existan llaves configuradas, la operación se finalizará con atención directa de CAMHE Infraestructura.",
-    "Las imágenes son referencias visuales. Las características finales pueden variar según medidas, materiales, acabados y disponibilidad al momento de cotizar."
+    "El sitio de CAMHE Infraestructura funciona como catálogo, carrito y medio de compra o solicitud de cotización para productos de equipamiento urbano, vial, pluvial y modular.",
+    "Todos los precios se muestran en pesos mexicanos (MXN) y pueden cambiar sin previo aviso por volumen, especificación, disponibilidad, ubicación de entrega, vigencia de proveedor o condiciones del proyecto.",
+    "Los productos están sujetos a disponibilidad. En artículos voluminosos, prefabricados o fabricados bajo medida, la entrega puede requerir cotización especial y validación logística con un asesor.",
+    "Los pagos en línea, cuando estén disponibles, se procesan mediante Conekta. Si las credenciales de pago no están configuradas, la operación se atenderá como solicitud de cotización por CAMHE Infraestructura.",
+    "La facturación está disponible cuando el cliente proporcione datos fiscales correctos y la compra o cotización haya sido confirmada por CAMHE Infraestructura.",
+    "Las entregas se coordinan según volumen, zona, tipo de producto, maniobras requeridas y condiciones de recepción. Las imágenes son referencias visuales y las características finales pueden variar por medidas, materiales y acabados."
   ]} />;
 }
 

@@ -19,7 +19,7 @@ export function ProductCard({ product }: { product: Product }) {
           <p className="text-xl font-black text-camhe-black">{formatProductPrice(product)}</p>
           <ul className="mt-3 space-y-1 text-xs text-neutral-600">
             {product.specs.map((spec) => (
-              <li key={spec}>• {spec}</li>
+              <li key={spec}>- {spec}</li>
             ))}
           </ul>
         </div>
