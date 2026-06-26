@@ -30,7 +30,7 @@ const cleanEmail = (value: unknown) => cleanText(value).toLowerCase();
 const cleanPhone = (value: unknown) => cleanText(value).replace(/[^\d+]/g, "");
 
 function getConektaStatus() {
-  return Boolean(process.env.CONEKTA_PRIVATE_KEY && process.env.NEXT_PUBLIC_CONEKTA_PUBLIC_KEY);
+  return Boolean(process.env.CONEKTA_PRIVATE_KEY);
 }
 
 function validateCustomer(customer: CheckoutCustomer) {
@@ -133,11 +133,12 @@ export async function POST(request: Request) {
     line_items: lineItems,
     metadata: {
       source: "camhe_infraestructura",
+      environment: "production",
       customer_phone: customer.phone,
       customer_company: customer.company,
       customer_city: customer.cityState,
       customer_comments: customer.comments,
-      cart_total_cents: String(totalCents)
+      cart_total_cents: totalCents
     },
     checkout: {
       type: "HostedPayment",
@@ -145,6 +146,7 @@ export async function POST(request: Request) {
       allowed_payment_methods: ["card", "cash", "bank_transfer"],
       success_url: `${siteUrl}/checkout/success`,
       failure_url: `${siteUrl}/checkout/cancel`,
+      cancel_url: `${siteUrl}/checkout/cancel`,
       monthly_installments_enabled: false
     }
   };

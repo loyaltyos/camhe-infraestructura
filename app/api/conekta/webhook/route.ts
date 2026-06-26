@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
 const paidEvents = new Set(["charge.paid", "order.paid"]);
-const failedEvents = new Set(["charge.payment_failed", "order.payment_failed", "charge.declined", "order.declined"]);
-const pendingEvents = new Set(["charge.pending_payment", "order.pending_payment"]);
+const failedEvents = new Set(["charge.payment_failed", "order.payment_failed"]);
 
 export async function POST(request: Request) {
   const rawBody = await request.text();
@@ -30,8 +29,6 @@ export async function POST(request: Request) {
 
   if (paidEvents.has(eventType)) {
     console.info("Conekta payment successful", { eventType, orderId });
-  } else if (pendingEvents.has(eventType)) {
-    console.info("Conekta payment pending", { eventType, orderId });
   } else if (failedEvents.has(eventType)) {
     console.warn("Conekta payment failed", { eventType, orderId });
   }

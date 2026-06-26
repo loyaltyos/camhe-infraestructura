@@ -11,8 +11,9 @@ export default function AvisoPrivacidad() {
         <p className="leading-7">CAMHE Infraestructura utiliza los datos enviados en formularios únicamente para atender solicitudes de información, cotización, compra, facturación, entrega y seguimiento comercial.</p>
         <p className="leading-7">Los datos pueden incluir nombre, empresa, teléfono, correo, ciudad, estado, datos de facturación y comentarios técnicos o comerciales relacionados con la solicitud.</p>
         <p className="leading-7">La información no se vende a terceros. Puede compartirse internamente con personal autorizado del Grupo CAMHE, asesores logísticos o proveedores de pago cuando sea necesario para atender el pedido.</p>
-        <p className="leading-7">Los pagos en línea, cuando estén disponibles, se procesan mediante Conekta. CAMHE Infraestructura no almacena datos completos de tarjetas bancarias en este sitio.</p>
-        <p className="leading-7">Los precios se muestran en MXN, los productos están sujetos a disponibilidad y las entregas se coordinan según volumen, zona y tipo de producto. La facturación está disponible con datos fiscales válidos.</p>
+        <p className="leading-7">Los pagos en línea se procesan mediante Conekta. CAMHE Infraestructura no almacena datos completos de tarjetas bancarias en este sitio.</p>
+        <p className="leading-7">Los precios se muestran en pesos mexicanos (MXN), los productos están sujetos a disponibilidad y las entregas se coordinan según volumen, zona y tipo de producto. Los tiempos de entrega son variables y la facturación está disponible con datos fiscales válidos.</p>
+        <p className="leading-7">Cuando una devolución sea solicitada, CAMHE Infraestructura podrá revisar el estado del producto y las condiciones de compra; productos especiales, voluminosos o bajo pedido pueden no aplicar a devolución automática.</p>
         <p className="leading-7">Para dudas o solicitudes relacionadas con datos personales, escribe a info@camheinfraestructura.com.mx.</p>
       </div>
     </section>

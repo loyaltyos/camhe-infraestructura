@@ -19,7 +19,8 @@ const specsByCategory: Record<Category, string[]> = {
   "Señalización Vial": ["Lámina galvanizada", "Vinil reflejante", "Postería compatible"],
   "Infraestructura Pluvial": ["Carga urbana", "Material de alta durabilidad", "Medidas bajo proyecto"],
   "Equipamiento Público": ["Uso intensivo", "Acabado para intemperie", "Diseño modular"],
-  "Casetas y Módulos": ["Estructura prefabricada", "Configuración bajo pedido", "Entrega coordinada"]
+  "Casetas y Módulos": ["Estructura prefabricada", "Configuración bajo pedido", "Entrega coordinada"],
+  "Prueba": ["Pago de validación", "Producto visible en catálogo", "Flujo Conekta producción"]
 };
 
 const slug = (value: string) =>
@@ -80,18 +81,27 @@ const baseProducts: Array<Omit<Product, "id" | "description" | "specs" | "image"
   { name: "Módulo de control de acceso", category: "Casetas y Módulos", price: 118000, priceType: "from" },
   { name: "Kiosco urbano", category: "Casetas y Módulos", price: 145000, priceType: "from" },
   { name: "Módulo comercial prefabricado", category: "Casetas y Módulos", price: 168000, priceType: "from" },
-  { name: "Cabina de seguridad", category: "Casetas y Módulos", price: 69000, priceType: "from" }
+  { name: "Cabina de seguridad", category: "Casetas y Módulos", price: 69000, priceType: "from" },
+  { name: "Compra mínima de prueba", category: "Prueba", price: 100 }
 ];
 
-export const products: Product[] = baseProducts.map((product, index) => ({
-  ...product,
-  id: `${slug(product.category)}-${index + 1}`,
-  description: `${product.name} para proyectos de infraestructura urbana, fraccionamientos, municipios, parques industriales y obra privada.`,
-  specs: specsByCategory[product.category],
-  image: `/products/infraestructura/${slug(product.name)}.jpg`,
-  altText: `Fotografía real de ${product.name.toLowerCase()} para catálogo de CAMHE Infraestructura`,
-  priceType: product.priceType ?? (product.price ? "fixed" : "quote")
-}));
+export const products: Product[] = baseProducts.map((product, index) => {
+  const isTestProduct = product.name === "Compra mínima de prueba";
+
+  return {
+    ...product,
+    id: isTestProduct ? "compra-minima-de-prueba" : `${slug(product.category)}-${index + 1}`,
+    description: isTestProduct
+      ? "Producto de prueba para validar el flujo de compra en producción."
+      : `${product.name} para proyectos de infraestructura urbana, fraccionamientos, municipios, parques industriales y obra privada.`,
+    specs: specsByCategory[product.category],
+    image: isTestProduct ? "/products/infraestructura/contenedor-urbano-metalico.jpg" : `/products/infraestructura/${slug(product.name)}.jpg`,
+    altText: isTestProduct
+      ? "Producto de prueba para validar el checkout de CAMHE Infraestructura"
+      : `Fotografía real de ${product.name.toLowerCase()} para catálogo de CAMHE Infraestructura`,
+    priceType: product.priceType ?? (product.price ? "fixed" : "quote")
+  };
+});
 
 export const featuredProducts = products.filter((product) => product.featured).slice(0, 8);
 

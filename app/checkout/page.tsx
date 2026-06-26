@@ -8,6 +8,7 @@ import { formatPrice, formatProductPrice } from "@/lib/products";
 
 const quoteMessage =
   "Solicitud recibida. Un asesor de CAMHE Infraestructura se comunicará contigo para confirmar disponibilidad, envío y forma de pago.";
+const paymentErrorMessage = "No pudimos iniciar el pago. Intenta nuevamente o contáctanos por WhatsApp.";
 
 export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();
@@ -61,7 +62,7 @@ export default function Checkout() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        setError(data.error || "No fue posible procesar tu solicitud. Intenta de nuevo.");
+        setError(conektaConfigured && response.status >= 500 ? paymentErrorMessage : data.error || paymentErrorMessage);
         return;
       }
 
@@ -74,7 +75,7 @@ export default function Checkout() {
       setSubmitted(true);
       clearCart();
     } catch {
-      setError("No fue posible conectar con el checkout. Intenta de nuevo o contáctanos por WhatsApp.");
+      setError(paymentErrorMessage);
     } finally {
       setLoading(false);
     }

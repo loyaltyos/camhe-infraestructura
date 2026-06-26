@@ -7,9 +7,10 @@ export default function Terminos() {
     "El sitio de CAMHE Infraestructura funciona como catálogo, carrito y medio de compra o solicitud de cotización para productos de equipamiento urbano, vial, pluvial y modular.",
     "Todos los precios se muestran en pesos mexicanos (MXN) y pueden cambiar sin previo aviso por volumen, especificación, disponibilidad, ubicación de entrega, vigencia de proveedor o condiciones del proyecto.",
     "Los productos están sujetos a disponibilidad. En artículos voluminosos, prefabricados o fabricados bajo medida, la entrega puede requerir cotización especial y validación logística con un asesor.",
-    "Los pagos en línea, cuando estén disponibles, se procesan mediante Conekta. Si las credenciales de pago no están configuradas, la operación se atenderá como solicitud de cotización por CAMHE Infraestructura.",
+    "Los pagos en línea se procesan mediante Conekta. Si las credenciales de pago no están configuradas, la operación se atenderá como solicitud de cotización por CAMHE Infraestructura.",
     "La facturación está disponible cuando el cliente proporcione datos fiscales correctos y la compra o cotización haya sido confirmada por CAMHE Infraestructura.",
-    "Las entregas se coordinan según volumen, zona, tipo de producto, maniobras requeridas y condiciones de recepción. Las imágenes son referencias visuales y las características finales pueden variar por medidas, materiales y acabados."
+    "Las entregas se coordinan según volumen, zona, tipo de producto, maniobras requeridas y condiciones de recepción. Los tiempos de entrega son variables y se confirman de acuerdo con disponibilidad, ruta y preparación del pedido.",
+    "Las devoluciones están sujetas a revisión del estado del producto. Productos especiales, voluminosos o bajo pedido pueden no aplicar a devolución automática."
   ]} />;
 }
 

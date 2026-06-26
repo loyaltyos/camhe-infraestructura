@@ -11,7 +11,8 @@ export const categories = [
   "Señalización Vial",
   "Infraestructura Pluvial",
   "Equipamiento Público",
-  "Casetas y Módulos"
+  "Casetas y Módulos",
+  "Prueba"
 ] as const;
 
 export type Category = (typeof categories)[number];
@@ -22,7 +23,8 @@ export const categoryDescriptions: Record<Category, string> = {
   "Señalización Vial": "Señales, postes y placas para vialidades urbanas, industriales y desarrollos privados.",
   "Infraestructura Pluvial": "Rejillas, tapas, brocales y registros para obras hidráulicas y urbanización.",
   "Equipamiento Público": "Juegos, gimnasios, contenedores y mobiliario funcional para espacios comunitarios.",
-  "Casetas y Módulos": "Soluciones prefabricadas para vigilancia, obra, control de acceso y operación comercial."
+  "Casetas y Módulos": "Soluciones prefabricadas para vigilancia, obra, control de acceso y operación comercial.",
+  "Prueba": "Producto mínimo para validar el flujo de compra en producción con Conekta."
 };
 
 export const categoryImages: Record<Category, string> = {
@@ -31,5 +33,6 @@ export const categoryImages: Record<Category, string> = {
   "Señalización Vial": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
   "Infraestructura Pluvial": "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80",
   "Equipamiento Público": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=80",
-  "Casetas y Módulos": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+  "Casetas y Módulos": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+  "Prueba": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
 };
